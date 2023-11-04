@@ -1,4 +1,4 @@
-import User from '../models/User';
+const User = require('../models/User');
 
 // Get user by ID
 const getUserById = async (req, res) => {
@@ -61,7 +61,7 @@ const createUser = async (req, res) => {
   }
 }
 
-export {
+module.exports = {
   getUserById,
-  createUser
+  createUser,
 };

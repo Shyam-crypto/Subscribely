@@ -1,27 +1,36 @@
+dotenv.config();
 import express from 'express';
-import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 
-// Import your route modules
-import productRoutes from './routes/Product';
-import userRoutes from './routes/userRoutes';
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
+import connectDB from './database/connection.js';
+import userRoutes from './routes/userRoutes.js'
+import Product from './models/Product.js';
 
+const port = process.env.PORT || 4000;
+
+connectDB();
 const app = express();
 
-// JSON middleware
+try {
+app.listen(port, () => console.log(`Server started on port ${port}`));
+} catch (error) {
+    console.error("connection failed");
+}
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
-// Connect to your MongoDB 
-mongoose.connect('mongodb://localhost:27017/your-database-name', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-// Define routes
-app.use('/api/products', productRoutes);
+app.use(cookieParser());
 app.use('/api/users', userRoutes);
+app.use('/r')
+app.post('/product', createProductValidationRules, ProductController.createProduct);
+app.get('/product', ProductController.getAllProducts);
+app.get('/product/:productId', ProductController.getProductById);
+app.put('/product/:productId', updateProductValidationRules, ProductController.updateProduct);
+app.delete('/product/:productId', ProductController.deleteProduct);
 
-// Start the Express server
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+app.get('/', (req, res) => res.send('server is ready'));
+
+app.use(notFound);
+app.use(errorHandler);

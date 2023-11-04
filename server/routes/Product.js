@@ -1,8 +1,7 @@
-import express from 'express';
-import { check } from 'express-validator';
-import ProductController from '../controller/Product';
-
+const express = require('express');
 const router = express.Router();
+const { check, validationResult } = require('express-validator');
+const ProductController = require('../controller/Product');
 
 // Create product validation rules
 const createProductValidationRules = [
@@ -23,4 +22,4 @@ router.get('/products/:productId', ProductController.getProductById);
 router.put('/products/:productId', updateProductValidationRules, ProductController.updateProduct);
 router.delete('/products/:productId', ProductController.deleteProduct);
 
-export default router;
+module.exports = router;

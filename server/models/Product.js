@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
   name: {
@@ -12,9 +12,9 @@ const productSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  // You can add more fields as needed
+  // can add more fields as needed
 });
 
 const Product = mongoose.model('Product', productSchema);
 
-export default Product;
+module.exports = Product;
