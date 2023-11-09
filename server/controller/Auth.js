@@ -61,14 +61,14 @@ const registerUser = async (req, res) => {
       const user = await User.findOne({ email });
   
       if (!user) {
-        return res.status(401).json({ error: 'Invalid credentials' });
+        return res.status(401).json({ error: 'Invalid Email or password' });
       }
   
       // Compare the provided password with the stored hash
       const passwordMatch = await bcrypt.compare(password, user.password);
   
       if (!passwordMatch) {
-        return res.status(401).json({ error: 'Invalid credentials' });
+        return res.status(401).json({ error: 'Invalid Email or password' });
       }
       // SLY-11
       // Create a JSON Web Token (JWT)
@@ -82,7 +82,6 @@ const registerUser = async (req, res) => {
       res.status(500).json({ error: 'Error logging in' });
     }
   };
-
   const logoutUser = (req, res) => {
   
    res.status(200).json({ message: 'User logged out successfully' });
