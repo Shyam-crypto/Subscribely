@@ -11,7 +11,8 @@ db();
 app.use(express.json());
 app.use('/api/auth', routes);
 
-
-app.listen(PORT, () => {
-    console.log(`server is listening on the port ${PORT}`);
-});
+try {
+    app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+    } catch (error) {
+        console.error("connection failed");
+    }
