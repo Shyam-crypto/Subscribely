@@ -82,9 +82,6 @@ const registerUser = async (req, res) => {
       res.status(500).json({ error: 'Error logging in' });
     }
   };
-  const logoutUser = (req, res) => {
   
-   res.status(200).json({ message: 'User logged out successfully' });
-  };
 
-export {registerUser, loginUser,logoutUser};
+export {registerUser, loginUser,};
