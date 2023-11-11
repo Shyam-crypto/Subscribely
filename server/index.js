@@ -6,13 +6,23 @@ import db from './database/db.js';
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;
-db();
 
 app.use(express.json());
 app.use('/api/auth', routes);
 
-try {
-    app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
-    } catch (error) {
-        console.error("connection failed");
+ async function startApp(){
+    try{
+        await db();
+
+
+        app.listen(PORT, () => {
+            console.log(`Server started on port ${PORT}`)
+        });
+        console.log('Application started succesfully');
+
+    }catch(error){
+        console.log('Error during startup:',error.message);
     }
+ }
+
+ startApp();
