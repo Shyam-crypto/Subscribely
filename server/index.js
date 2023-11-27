@@ -11,18 +11,13 @@ app.use(express.json());
 app.use('/api/auth', routes);
 
  async function startApp(){
-    try{
-        await db();
-
-
-        app.listen(PORT, () => {
-            console.log(`Server started on port ${PORT}`)
-        });
-        console.log('Application started succesfully');
-
-    }catch(error){
-        console.log('Error during startup:',error.message);
-    }
- }
-
+        db()
+        .then(()=> {
+            console.log("DB: running")
+            app.listen(PORT, () =>{
+                console.log(`server started on port ${PORT}`)
+            });
+        }).catch(console.log)
+    
+}
  startApp();
