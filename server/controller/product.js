@@ -73,7 +73,7 @@ const updateProduct = async (req, res) => {
       const updatedProduct = await product.findOneAndUpdate({ id }, { name, description, image, price, intervals }, { new: true });
   
       if (updatedProduct) {
-        // Check if the user has ownership of the updated product
+        
         if (updatedProduct.owner.toString() === req.user._id) {
           return res.status(200).json(updatedProduct);
         } else {
@@ -96,7 +96,7 @@ const deleteProduct = async (req, res) => {
       const deletedProduct = await product.findOneAndDelete({ id });
   
       if (deletedProduct) {
-        // Check if the user has ownership of the deleted product
+        
         if (deletedProduct.owner.toString() === req.user._id) {
           return res.status(200).json(deletedProduct);
         } else {
