@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import styles from '../styles/auth.module.css';
 
 const Register = () => {
   const router = useRouter();
@@ -8,38 +9,47 @@ const Register = () => {
   const [password, setPassword] = useState('');
 
   const handleRegister = () => {
-  
+
+    if (!email || !password) {
+      alert('Please enter both email and password.');
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    if (password.length < 6) {
+      alert('Password must be at least 6 characters.');
+      return;
+    }
+
+    
     router.push('/');
   };
 
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   return (
-    <div className="container">
+    <div className={styles.container}>
       <h1>Register</h1>
       <form>
-        <label>
+        <label htmlFor="email">
           Email:
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         </label>
-        <br />
-        <label>
+        <label htmlFor="password">
           Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         </label>
-        <br />
         <button type="button" onClick={handleRegister}>
           Register
         </button>
       </form>
-
-      <style jsx>{`
-        .container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          height: 100vh;
-        }
-      `}</style>
     </div>
   );
 };
