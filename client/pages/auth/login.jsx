@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import styles from '../styles/auth.module.css';
+import styles from '../../styles/auth.module.css';
 
 const Login = () => {
   const router = useRouter();
@@ -37,7 +37,7 @@ const Login = () => {
   return (
     <div className={styles.container}>
       <h1>Login</h1>
-      <form>
+      <form className={styles.form}>
         <label htmlFor="email">
           Email:
           <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
