@@ -4,14 +4,15 @@ import styles from '../../styles/auth.module.css';
 
 const Register = () => {
   const router = useRouter();
-
+  
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleRegister = () => {
 
-    if (!email || !password) {
-      alert('Please enter both email and password.');
+    if (!name || !email || !password) {
+      alert('Please enter required feilds');
       return;
     }
 
@@ -38,6 +39,10 @@ const Register = () => {
     <div className={styles.container}>
       <h1>Register</h1>
       <form>
+        <label htmlFor='name'>
+          Name: 
+          <input type='name' id="name" value={name} onChange={(e) => setName(e.target.value)} required/>
+        </label>
         <label htmlFor="email">
           Email:
           <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
