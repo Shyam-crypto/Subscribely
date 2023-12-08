@@ -1,11 +1,11 @@
-import product from "../models/product.js";
+import Product from "../models/product.js";
 
 // Get all products by user ID
 const getAllProducts = async (req, res) => {
-    const userId = req.user._id; 
+    const userId = req.user.userId; 
   
     try {
-      const products = await product.find({ owner: userId });
+      const products = await Product.find({ owner: userId });
       res.status(200).json(products);
     } catch (error) {
       res.status(500).json({ error: 'Error fetching products by user ID' });
@@ -14,49 +14,39 @@ const getAllProducts = async (req, res) => {
 
 // get product by id
 const getProductById = async (req, res) => {
+  try {
     const { id } = req.params;
+    const userId = req.user.userId;
 
-    try {
-        const product = await product.findOne({ id });
+    const product = await Product.findById({ _id: id});
 
-        if (!product) {
-            return res.status(404).json({ error: 'product not found'});
-        }
-
-        const token = req.header('Authorization');
-
-        if (!token) {
-            return res.status(401).json({error: 'Access denied. No token provided.'});
-        }
-
-        try{
-
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            const userId = decoded.userId;
-
-            //compareing userId with product owner
-            if (product.owner.toString() === userId) {
-            
-                return res.status(200).json({ product, mode: 'read-write'});
-            } else {
-                return res.status(403).json({ error: 'Access denied. User does not own a product'});
-
-            }
-        }catch (error) {
-            return res.status(401).json({ error: 'Invalid token'});
-        }
-    } catch (error) {
-        return res.status(500).json({ error: 'Error fetching product'});
+    if (!product) {
+      return res.status(404).json({ error: 'Product not found' });
     }
+
+    if (product.owner.toString() === userId) {
+      return res.status(200).json({ product, mode: 'read-write' });
+    } else {
+      return res.status(200).json({ product, mode: 'read-only' });
+    }
+  } catch (error) {
+    console.error('Error fetching product by ID:', error);
+    return res.status(500).json({ error: 'Error fetching product by ID' });
+  }
 };
 
 //new prod
 const createProduct = async (req, res) => {
     const { name, description, image, price, intervals } = req.body;
-    const owner = req.user._id;
+    
+    const owner = req.user.userId;
+
   
     try {
-      const newProduct = new product({ name, description, image, price, intervals, owner });
+        if (!name || !description || !price || !intervals) {
+          return res.status(400).json({ error: 'Please provide all required fields' });
+        }
+      const newProduct = new Product({ name, description, image, price, intervals, owner });
       await newProduct.save();
       res.status(201).json(newProduct);
     } catch (error) {
@@ -64,40 +54,43 @@ const createProduct = async (req, res) => {
     }
   };
 
-// Update a product
-const updateProduct = async (req, res) => {
-    const { id } = req.params;
-    const { name, description, image, price, intervals } = req.body;
-  
-    try {
-      const updatedProduct = await product.findOneAndUpdate({ id }, { name, description, image, price, intervals }, { new: true });
-  
-      if (updatedProduct) {
-        
-        if (updatedProduct.owner.toString() === req.user._id) {
-          return res.status(200).json(updatedProduct);
-        } else {
-          return res.status(403).json({ error: 'Access denied. User does not own the product.' });
-        }
-      } else {
-        return res.status(404).json({ error: 'Product not found' });
-      }
-    } catch (error) {
-      return res.status(500).json({ error: 'Error updating product' });
-    }
-  };
-  
 
+const updateProduct = async (req, res) => {
+  const { id } = req.params;
+  const { name, description, image, price, intervals } = req.body;
+  
+  console.log('ID:', id);
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      { _id: id },
+      { name, description, image, price, intervals },
+      { new: true });
+
+      console.log('Updated product:', updatedProduct);
+    if (updatedProduct) {
+      if (updatedProduct.owner.toString() === req.user.userId) {
+        return res.status(200).json(updatedProduct);
+      } else {
+        return res.status(403).json({ error: 'Access denied. User does not own the product.' });
+      }
+    } else {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+  } catch (error) {
+    console.error('Error updating product:', error);
+    return res.status(500).json({ error: 'Error updating product' });
+  }
+};
 // Delete a product 
 const deleteProduct = async (req, res) => {
     const { id } = req.params;
   
     try {
-      const deletedProduct = await product.findOneAndDelete({ id });
+      const deletedProduct = await Product.findOneAndDelete({ _id: id });
   
       if (deletedProduct) {
         
-        if (deletedProduct.owner.toString() === req.user._id) {
+        if (deletedProduct.owner.toString() === req.user.userId) {
           return res.status(200).json(deletedProduct);
         } else {
           return res.status(403).json({ error: 'Access denied. User does not own the product.' });

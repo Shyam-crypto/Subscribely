@@ -10,7 +10,7 @@ import { verifyToken } from '../middleware/authm.js';
 const router = express.Router();
 
 router.get('/products', verifyToken, getAllProducts);
-router.get('/products/:id/mode', getProductById);
+router.get('/products/:id', verifyToken, getProductById);
 router.post('/products', verifyToken, createProduct);
 router.put('/products/:id', verifyToken, updateProduct);
 router.delete('/products/:id', verifyToken, deleteProduct);

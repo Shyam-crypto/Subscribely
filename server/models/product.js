@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 const productSchema = new mongoose.Schema({
   id: {
     type: String,
-    default: () => uuidv4(), // You need to import the uuidv4 function
+    default: () => uuidv4(), 
     unique: true,
     required: true,
   },
@@ -33,6 +33,6 @@ const productSchema = new mongoose.Schema({
   },
 });
 
-const Product = mongoose.model('Product', productSchema);
+const Product = mongoose.model('Product', productSchema,  );
 
 export default Product;
