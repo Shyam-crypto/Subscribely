@@ -1,5 +1,5 @@
 {
-  "name": "auth",
+  "name": "collection",
   "version": "1",
   "items": [
     {
@@ -12,13 +12,13 @@
         "headers": [
           {
             "name": "Authorization",
-            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5NmVjZGE1MDZhMjVjM2NiOTA4Y2UiLCJpYXQiOjE3MDE3OTQwNjgsImV4cCI6MTcwMTk2Njg2OH0.n36psHK3j6xrWu5CTD0Im8H01vx-YI6ykR_jitJesFg",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5NmVjZGE1MDZhMjVjM2NiOTA4Y2UiLCJpYXQiOjE3MDIwMjEzNzQsImV4cCI6MTcwMjE5NDE3NH0.nLNgI9H4TndET6lQuaqrwoU2eXyYBXjfh4XotPKDAOQ",
             "enabled": true
           }
         ],
         "body": {
           "mode": "json",
-          "json": "{\"name\":\"laptop\",\n\"description\":\"asus\",\n\"image\":\"\",\n\"price\":80000,\n\"intervals\":\"weekly\",\n \"owner\":\"65696ecda506a25c3cb908ce\"\n}",
+          "json": "{\"name\":\"mouse\",\n\"description\":\"razor\",\n\"image\":\"\",\n\"price\":800,\n\"intervals\":\"monthly\",\n \"owner\":\"65696ecda506a25c3cb908ce\"\n}",
           "formUrlEncoded": [],
           "multipartForm": []
         },
@@ -49,7 +49,7 @@
         "headers": [
           {
             "name": "Authorization",
-            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5NmVjZGE1MDZhMjVjM2NiOTA4Y2UiLCJpYXQiOjE3MDE2OTMwMjAsImV4cCI6MTcwMTg2NTgyMH0.pl6acjM-nhAyTlj7X8W04ZdhpqDjSZqHghA2CNQy0M8",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5NmVjZGE1MDZhMjVjM2NiOTA4Y2UiLCJpYXQiOjE3MDIwMjEzNzQsImV4cCI6MTcwMjE5NDE3NH0.nLNgI9H4TndET6lQuaqrwoU2eXyYBXjfh4XotPKDAOQ",
             "enabled": true
           }
         ],
@@ -85,7 +85,7 @@
         "headers": [
           {
             "name": "Authorization",
-            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5NmVjZGE1MDZhMjVjM2NiOTA4Y2UiLCJpYXQiOjE3MDE2ODU3MjEsImV4cCI6MTcwMTg1ODUyMX0.wNCztCZwWUSmq01vfoWj7UidEmnL9pRxnuD2ItN3b_0",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5NmVjZGE1MDZhMjVjM2NiOTA4Y2UiLCJpYXQiOjE3MDIwMjEzNzQsImV4cCI6MTcwMjE5NDE3NH0.nLNgI9H4TndET6lQuaqrwoU2eXyYBXjfh4XotPKDAOQ",
             "enabled": true
           }
         ],
@@ -122,7 +122,7 @@
         "headers": [
           {
             "name": "Authorization",
-            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5NmVjZGE1MDZhMjVjM2NiOTA4Y2UiLCJpYXQiOjE3MDE3OTQwNjgsImV4cCI6MTcwMTk2Njg2OH0.n36psHK3j6xrWu5CTD0Im8H01vx-YI6ykR_jitJesFg",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5NmVjZGE1MDZhMjVjM2NiOTA4Y2UiLCJpYXQiOjE3MDIwMjEzNzQsImV4cCI6MTcwMjE5NDE3NH0.nLNgI9H4TndET6lQuaqrwoU2eXyYBXjfh4XotPKDAOQ",
             "enabled": true
           }
         ],
@@ -216,18 +216,18 @@
       "name": "update",
       "seq": 4,
       "request": {
-        "url": "http://localhost:4000/api/products/products/656f5244b50ba6920c1eb904",
+        "url": "http://localhost:4000/api/products/products/6572c9232e0b73f02ba8cc60",
         "method": "PUT",
         "headers": [
           {
             "name": "Authorization",
-            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5NmVjZGE1MDZhMjVjM2NiOTA4Y2UiLCJpYXQiOjE3MDE3OTQwNjgsImV4cCI6MTcwMTk2Njg2OH0.n36psHK3j6xrWu5CTD0Im8H01vx-YI6ykR_jitJesFg",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5NmVjZGE1MDZhMjVjM2NiOTA4Y2UiLCJpYXQiOjE3MDIwMjEzNzQsImV4cCI6MTcwMjE5NDE3NH0.nLNgI9H4TndET6lQuaqrwoU2eXyYBXjfh4XotPKDAOQ",
             "enabled": true
           }
         ],
         "body": {
           "mode": "json",
-          "json": "{\n\"name\":\"laptop\",\n\"description\":\"AsusGaming\",\n\"image\":\"right\",\n\"price\":50000,\n\"intervals\":\"monthly\"\n}",
+          "json": "{\n\"name\":\"keyboard\",\n\"description\":\"razor\",\n\"image\":\"right\",\n\"price\":5000,\n\"intervals\":\"monthly\"\n}",
           "formUrlEncoded": [],
           "multipartForm": []
         },
