@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import {axiosInstance} from '../../configs/axios'
 import styles from '../../styles/auth.module.css';
 
 const Login = () => {
@@ -8,7 +9,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
 
     if (!email || !password) {
       alert('Please enter both email and password.');
@@ -24,8 +25,19 @@ const Login = () => {
       alert('Password must be at least 6 characters.');
       return;
     }
+    try {
+      const userData = { email, password };
+      const responseData = await axiosInstance({
+        method: 'POST',
+        url: '/api/auth/login',
+        data: userData
+      });
+      console.log("login sucessfull",responseData);
+    } catch (error) {
+      console.log("error logging in")
+    }
 
-    router.push('/');
+    //router.push('/');
   };
 
   const isValidEmail = (email) => {

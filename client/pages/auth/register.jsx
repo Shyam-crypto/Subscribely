@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../../styles/auth.module.css';
-import { axiosInstance, registerUser } from '../../configs/axios'; 
+import { axiosInstance } from '../../configs/axios'; 
 
 const Register = () => {
   const router = useRouter();
