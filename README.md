@@ -17,7 +17,7 @@ Subscribely is a subscription-as-a-service platform that allows users to quickly
 
 Clone the repo
 ```bash
-git clone https://github.com/DuolearnHQ/Subscribely.git subscribely
+git clone https://github.com/Punithshetty321/subscriberly.git
 ```
 
 ### Open two terminals and run the following commands
@@ -57,22 +57,3 @@ Start the server
 npm start
 ```
  
-## Support
-
-For support, Join out [discord Server](https://discord.gg/T6pBeXqMsU) or [WhatsApp Group](https://chat.whatsapp.com/FwxiaXlWltFF0GWaCXcIJS)
-
-
-## Contributing
-
-Contributions are always welcome!
-
-You can submit a PR, and after an internal review, we'll merge your PR, and if there's any changes required, we'll share them with you. 
-
-If you wish to work on this project separately, on your own, You can follow the Getting started guide to setup the project, but make sure to change the remote origin, by using the commands below. 
-
-```bash
-git remote remove origin
-```
-```bash
-git remote add origin <Your repo link>
-```
