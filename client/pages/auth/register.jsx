@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../../styles/auth.module.css';
+import { axiosInstance } from '../../configs/axios'; 
 
 const Register = () => {
   const router = useRouter();
-  
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleRegister = () => {
-
+  const handleRegister = async () => {
     if (!name || !email || !password) {
-      alert('Please enter required feilds');
+      alert('Please enter required fields');
       return;
     }
 
@@ -26,8 +26,23 @@ const Register = () => {
       return;
     }
 
-    
-    router.push('/');
+    try {
+      const userData = { name, email, password };
+      const responseData = await axiosInstance({
+        method: 'POST',
+        url: '/api/auth/register',
+        data: userData
+      });
+
+      console.log('Registration successful:', responseData);
+
+      // Redirect to another page or perform other actions after successful registration
+      //router.push('/');
+    } catch (error) {
+      // Handle registration error
+      console.error('Registration error:', error);
+      alert('Error registering user. Please try again.');
+    }
   };
 
   const isValidEmail = (email) => {
@@ -40,8 +55,8 @@ const Register = () => {
       <h1>Register</h1>
       <form>
         <label htmlFor='name'>
-          Name: 
-          <input type='name' id="name" value={name} onChange={(e) => setName(e.target.value)} required/>
+          Name:
+          <input type='name' id="name" value={name} onChange={(e) => setName(e.target.value)} required />
         </label>
         <label htmlFor="email">
           Email:

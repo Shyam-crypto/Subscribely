@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { axiosInstance } from '../../configs/axios';
 import styles from '../../styles/auth.module.css';
 
 const Login = () => {
@@ -8,8 +9,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-
+  const handleLogin = async () => {
     if (!email || !password) {
       alert('Please enter both email and password.');
       return;
@@ -25,13 +25,30 @@ const Login = () => {
       return;
     }
 
-    router.push('/');
+    try {
+      const userData = { email, password };
+      const responseData = await axiosInstance({
+        method: 'POST',
+        url: '/api/auth/login',
+        data: userData,
+      });
+      console.log('Login successful', responseData);
+
+      
+      // router.push('/');
+    } catch (error) {
+      console.log('Error logging in:', error);
+      // Handle login error
+    }
   };
 
   const isValidEmail = (email) => {
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  };
+
+  const navigateToRegister = () => {
+    router.push('/auth/register'); 
   };
 
   return (
@@ -49,6 +66,12 @@ const Login = () => {
         <button type="button" onClick={handleLogin}>
           Login
         </button>
+        <p>
+          Don't have an account?{' '}
+          <a href="#" onClick={navigateToRegister}>
+            Register here
+          </a>
+        </p>
       </form>
     </div>
   );
