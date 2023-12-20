@@ -1,5 +1,6 @@
 import { body } from 'express-validator';
 
+const validIntervals = ['weekly','monthly','annualy'];
 const validateCreateProduct = [
     body('name')
       .notEmpty().withMessage('Name is required')
@@ -26,7 +27,9 @@ const validateUpdateProduct = [
     .isFloat({ min: 0 }).withMessage('Price must be a positive number'),
   body('intervals')
     .optional()
-    .notEmpty().withMessage('Intervals are required'),
+    .notEmpty().withMessage('Intervals are required')
+    .isIn(validIntervals).withMessage('invalid interval value'),
+    
 ];
 
 export { validateCreateProduct, validateUpdateProduct };

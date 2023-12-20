@@ -36,10 +36,16 @@ const updateProduct = async (req, res) => {
 
   console.log('ID:', id);
   try {
+    const validIntervals = ['weekly', 'monthly', 'annualy'];
+
+    if (intervals && !validIntervals.includes(intervals)) {
+      return res.status(400).json({ error: 'Invalid value for intervals' });
+    }
+    
     if (!name || !description || !price || !intervals) {
       return res.status(400).json({ error: 'Please provide all required fields' });
     }
-
+    
     const updatedProduct = await Product.findByIdAndUpdate(
       { _id: id },
       { name, description, image, price, intervals },

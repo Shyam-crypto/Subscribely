@@ -23,7 +23,7 @@ const productSchema = new mongoose.Schema({
   },
   intervals: {
     type: String,
-    enum: ['daily', 'weekly', 'monthly'],
+    enum: ['weekly', 'monthly', 'annualy'],
     required: true,
   },
   owner: {
