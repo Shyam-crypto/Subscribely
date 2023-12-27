@@ -1,5 +1,6 @@
 import { validationResult } from "express-validator";
 import Product from "../models/product.js";
+import jwt from 'jsonwebtoken';
 
 
 const createProduct = async (req, res) => {
@@ -36,16 +37,9 @@ const updateProduct = async (req, res) => {
 
   console.log('ID:', id);
   try {
-    const validIntervals = ['weekly', 'monthly', 'annualy'];
-
-    if (intervals && !validIntervals.includes(intervals)) {
-      return res.status(400).json({ error: 'Invalid value for intervals' });
-    }
-    
     if (!name || !description || !price || !intervals) {
       return res.status(400).json({ error: 'Please provide all required fields' });
     }
-    
     const updatedProduct = await Product.findByIdAndUpdate(
       { _id: id },
       { name, description, image, price, intervals },
@@ -89,6 +83,40 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+// get product by id
+const getProductById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const token = req.header('Authorization');
+    let mode = 'read-only';
+
+    if (token) {
+      try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded;
+        mode = 'read-write';
+      } catch (error) {
+        console.error('Error verifying token:', error);
+        return res.status(401).json({ error: 'Invalid token' });
+      }
+    }
+
+    const product = await Product.findById({ _id: id });
+
+    if (!product) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+
+    const productWithMode = { ...product.toObject(), mode };
+
+    return res.status(200).json(productWithMode);
+  } catch (error) {
+    console.error('Error fetching product by ID:', error);
+    return res.status(500).json({ error: 'Error fetching product by ID' });
+  }
+};
+
 // Get all products by user ID
 const getAllProducts = async (req, res) => {
     const userId = req.user.userId; 
@@ -100,32 +128,6 @@ const getAllProducts = async (req, res) => {
       res.status(500).json({ error: 'Error fetching products by user ID' });
     }
   };
-
-// get product by id
-const getProductById = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const userId = req.user.userId;
-
-    const product = await Product.findById({ _id: id});
-
-    if (!product) {
-      return res.status(404).json({ error: 'Product not found' });
-    }
-
-    if (product.owner.toString() === userId) {
-      return res.status(200).json({ product, mode: 'read-write' });
-    } else {
-      return res.status(200).json({ product, mode: 'read-only' });
-    }
-  } catch (error) {
-    console.error('Error fetching product by ID:', error);
-    return res.status(500).json({ error: 'Error fetching product by ID' });
-  }
-};
-
-
-  
 
   export {
       getAllProducts,

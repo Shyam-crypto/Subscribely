@@ -10,7 +10,7 @@ import { validateCreateProduct, validateUpdateProduct } from '../utils/productva
 const router = express.Router();
 
 router.get('/products', verifyToken, getAllProducts);
-router.get('/products/:id', verifyToken, getProductById);
+router.get('/products/:id', getProductById);
 router.post('/products', verifyToken, validateCreateProduct, createProduct);
 router.put('/products/:id', verifyToken, validateUpdateProduct, updateProduct);
 router.delete('/products/:id', verifyToken, deleteProduct);

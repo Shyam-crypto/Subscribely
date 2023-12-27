@@ -9,7 +9,9 @@ const validateCreateProduct = [
     body('price')
       .notEmpty().withMessage('Price is required')
       .isFloat({ min: 0 }).withMessage('Price must be a positive number'),
-    body('intervals').notEmpty().withMessage('Intervals are required'),
+    body('intervals')
+    .notEmpty().withMessage('Intervals are required')
+    .isIn(validIntervals).withMessage('invalid interval value'),
   ];
 
 const validateUpdateProduct = [
