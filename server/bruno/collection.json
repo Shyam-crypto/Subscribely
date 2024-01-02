@@ -1,0 +1,253 @@
+{
+  "name": "collection",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "create product",
+      "seq": 2,
+      "request": {
+        "url": "http://localhost:4000/api/products/products",
+        "method": "POST",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5NmVjZGE1MDZhMjVjM2NiOTA4Y2UiLCJpYXQiOjE3MDIwMjEzNzQsImV4cCI6MTcwMjE5NDE3NH0.nLNgI9H4TndET6lQuaqrwoU2eXyYBXjfh4XotPKDAOQ",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\"name\":\"mouse\",\n\"description\":\"razor\",\n\"image\":\"\",\n\"price\":800,\n\"intervals\":\"monthly\",\n \"owner\":\"65696ecda506a25c3cb908ce\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "DeleteProduct",
+      "seq": 7,
+      "request": {
+        "url": "http://localhost:4000/api/products/products/656b4030d61d8ee7b5a6e370",
+        "method": "DELETE",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5NmVjZGE1MDZhMjVjM2NiOTA4Y2UiLCJpYXQiOjE3MDIwMjEzNzQsImV4cCI6MTcwMjE5NDE3NH0.nLNgI9H4TndET6lQuaqrwoU2eXyYBXjfh4XotPKDAOQ",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "getAllProducts",
+      "seq": 5,
+      "request": {
+        "url": "http://localhost:4000/api/products/products",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5NmVjZGE1MDZhMjVjM2NiOTA4Y2UiLCJpYXQiOjE3MDIwMjEzNzQsImV4cCI6MTcwMjE5NDE3NH0.nLNgI9H4TndET6lQuaqrwoU2eXyYBXjfh4XotPKDAOQ",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "getProductById",
+      "seq": 8,
+      "request": {
+        "url": "http://localhost:4000/api/products/products/656f5244b50ba6920c1eb904",
+        "method": "GET",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5NmVjZGE1MDZhMjVjM2NiOTA4Y2UiLCJpYXQiOjE3MDIwMjEzNzQsImV4cCI6MTcwMjE5NDE3NH0.nLNgI9H4TndET6lQuaqrwoU2eXyYBXjfh4XotPKDAOQ",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "login",
+      "seq": 3,
+      "request": {
+        "url": "http://localhost:4000/api/auth/login",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"email\":\"shyam01@gmail.com\",\n  \"password\":\"Ice@123\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "register",
+      "seq": 1,
+      "request": {
+        "url": "http://localhost:4000/api/auth/register",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"name\":\"shyam\",\n\"email\":\"shyam01@gmail.com\",\n\"password\":\"Ice@123\"}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "update",
+      "seq": 4,
+      "request": {
+        "url": "http://localhost:4000/api/products/products/6572c9232e0b73f02ba8cc60",
+        "method": "PUT",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTY5NmVjZGE1MDZhMjVjM2NiOTA4Y2UiLCJpYXQiOjE3MDIwMjEzNzQsImV4cCI6MTcwMjE5NDE3NH0.nLNgI9H4TndET6lQuaqrwoU2eXyYBXjfh4XotPKDAOQ",
+            "enabled": true
+          }
+        ],
+        "body": {
+          "mode": "json",
+          "json": "{\n\"name\":\"keyboard\",\n\"description\":\"razor\",\n\"image\":\"right\",\n\"price\":5000,\n\"intervals\":\"monthly\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    }
+  ],
+  "environments": []
+}
