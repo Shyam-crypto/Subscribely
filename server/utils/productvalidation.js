@@ -12,6 +12,12 @@ const validateCreateProduct = [
     body('intervals')
     .notEmpty().withMessage('Intervals are required')
     .isIn(validIntervals).withMessage('invalid interval value'),
+    (req, res, next) => {
+      if (!req.files || !req.files.image) {
+        return res.status(400).json({ error: 'Image is required' });
+      }
+      next();
+    }
   ];
 
 const validateUpdateProduct = [

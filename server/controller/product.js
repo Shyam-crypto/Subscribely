@@ -1,5 +1,6 @@
 import { validationResult } from "express-validator";
 import Product from "../models/product.js";
+import { uploadFileToS3 } from "../services/services.js"; 
 import jwt from 'jsonwebtoken';
 
 
@@ -17,7 +18,16 @@ const createProduct = async (req, res) => {
       return res.status(400).json({ error: 'Please provide all required fields' });
     }
 
-    const newProduct = new Product({ name, description, image, price, intervals, owner });
+    const file = req.files.image;
+    const imageUrl = await uploadFileToS3(file, 'services');
+
+    const newProduct = new Product({
+       name,
+       description, 
+       image: imageUrl, 
+       price, 
+       intervals, 
+       owner });
     await newProduct.save();
     res.status(201).json(newProduct);
   } catch (error) {
