@@ -1,6 +1,6 @@
 import { validationResult } from "express-validator";
 import Product from "../models/product.js";
-import { uploadFileToS3 } from "../services/services.js"; 
+import { uploadFileToS3 } from "../services/imageupload.js"; 
 import jwt from 'jsonwebtoken';
 
 
@@ -76,19 +76,22 @@ const deleteProduct = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const deletedProduct = await Product.findOneAndDelete({ _id: id });
+    const product = await Product.findById(id);
 
-    if (deletedProduct) {
-      
-      if (deletedProduct.owner.toString() === req.user.userId) {
-        return res.status(200).json(deletedProduct);
-      } else {
-        return res.status(403).json({ error: 'Access denied. User does not own the product.' });
-      }
-    } else {
-      return res.status(404).json({ error: 'Product not found' });
+    if (!product) {
+        return res.status(404).json({ error: 'Product not found' });
     }
+    
+    if (product.owner.toString() !== req.user.userId) {
+       return res.status(403).json({ error: 'Access denied. User does not own the product.' });
+    }
+    
+    await Product.findByIdAndDelete(id);
+  
+    return res.status(200).send(true);
+      
   } catch (error) {
+    console.error('Error creating product', error);
     return res.status(500).json({ error: 'Error deleting product' });
   }
 };

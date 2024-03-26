@@ -1,5 +1,4 @@
 import AWS from 'aws-sdk';
-import fs from 'fs';
 
 
 const s3 = new AWS.S3({

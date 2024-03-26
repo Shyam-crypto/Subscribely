@@ -9,11 +9,11 @@ import { verifyToken } from '../middleware/authm.js';
 import { validateCreateProduct, validateUpdateProduct } from '../utils/productvalidation.js';
 const router = express.Router();
 
-router.get('/products', verifyToken, getAllProducts);
-router.get('/products/:id', getProductById);
-router.post('/products', verifyToken, validateCreateProduct, createProduct);
-router.put('/products/:id', verifyToken, validateUpdateProduct, updateProduct);
-router.delete('/products/:id', verifyToken, deleteProduct);
+router.get('/getallproducts', verifyToken, getAllProducts);
+router.get('/getproduct/:id', getProductById);
+router.post('/createproduct', verifyToken, validateCreateProduct, createProduct);
+router.put('/updateproduct/:id', verifyToken, validateUpdateProduct, updateProduct);
+router.delete('/deleteproduct/:id', verifyToken, deleteProduct);
 
 
 
