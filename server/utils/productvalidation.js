@@ -1,6 +1,14 @@
 import { body } from 'express-validator';
 
 const validIntervals = ['weekly','monthly','annualy'];
+
+const validateFile = (value, { req }) => {
+  if (!req.files || !req.files.image) {
+    throw new Error('Image is required');
+  }
+
+};
+
 const validateCreateProduct = [
     body('name')
       .notEmpty().withMessage('Name is required')
@@ -12,12 +20,7 @@ const validateCreateProduct = [
     body('intervals')
     .notEmpty().withMessage('Intervals are required')
     .isIn(validIntervals).withMessage('invalid interval value'),
-    /*(req, res, next) => {
-      if (!req.files || !req.files.image) {
-        return res.status(400).json({ error: 'Image is required' });
-      }
-      next();
-    }*/
+   
   ];
 
 const validateUpdateProduct = [
@@ -37,6 +40,7 @@ const validateUpdateProduct = [
     .optional()
     .notEmpty().withMessage('Intervals are required')
     .isIn(validIntervals).withMessage('invalid interval value'),
+  body('image').custom(validateFile)
     
 ];
 

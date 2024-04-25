@@ -10,7 +10,7 @@ const createProduct = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { name, description, image, price, intervals } = req.body;
+  const { name, description, price, intervals } = req.body;
   const owner = req.user.userId;
 
   try {
@@ -18,8 +18,13 @@ const createProduct = async (req, res) => {
       return res.status(400).json({ error: 'Please provide all required fields' });
     }
 
-    const file = req.files.image;
-    const imageUrl = await uploadFileToS3(file, 'services');
+    if (!req.file) {
+      return res.status(400).json({ error: 'Image file is required' });
+  }
+
+
+    const file = req.file;
+    const imageUrl = await uploadFileToS3(req.file, 'services');
 
     const newProduct = new Product({
        name,

@@ -1,5 +1,8 @@
 import AWS from 'aws-sdk';
+import multer from 'multer';
 
+const storage = multer.memoryStorage(); 
+const upload = multer({ storage: storage });
 
 const s3 = new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -10,10 +13,14 @@ const s3 = new AWS.S3({
 
 const uploadFileToS3 = async (file, folderName) => {
   try {
+      if (!file) {
+          throw new Error('File is undefined or null');
+      }
+
     const uploadParams = {
       Bucket: process.env.AWS_BUCKET_NAME,
       Key: `${folderName}/${file.name}`,
-      Body: fs.createReadStream(file.tempFilePath),
+      Body: file.buffer, 
       ContentType: file.mimetype
     };
 
@@ -25,4 +32,4 @@ const uploadFileToS3 = async (file, folderName) => {
   }
 };
 
-export { uploadFileToS3 };
+export { upload ,uploadFileToS3 };
