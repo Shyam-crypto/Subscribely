@@ -48,16 +48,28 @@ const updateProduct = async (req, res) => {
   }
   
   const { id } = req.params;
-  const { name, description, image, price, intervals } = req.body;
+  const { name, description,price, intervals } = req.body;
 
   console.log('ID:', id);
   try {
     if (!name || !description || !price || !intervals) {
       return res.status(400).json({ error: 'Please provide all required fields' });
     }
+
+    if(!req.file) {
+      return res.status(400).json({error:'Image is required'});
+    }
+
+    const file = req.file;
+    const imageUrl = await uploadFileToS3(req.file, 'services');
+
     const updatedProduct = await Product.findByIdAndUpdate(
       { _id: id },
-      { name, description, image, price, intervals },
+      { name,
+        description, 
+        image: imageUrl, 
+        price, 
+        intervals },
       { new: true });
 
       console.log('Updated product:', updatedProduct);

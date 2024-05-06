@@ -2,12 +2,6 @@ import { body } from 'express-validator';
 
 const validIntervals = ['weekly','monthly','annualy'];
 
-const validateFile = (value, { req }) => {
-  if (!req.files || !req.files.image) {
-    throw new Error('Image is required');
-  }
-
-};
 
 const validateCreateProduct = [
     body('name')
@@ -40,7 +34,7 @@ const validateUpdateProduct = [
     .optional()
     .notEmpty().withMessage('Intervals are required')
     .isIn(validIntervals).withMessage('invalid interval value'),
-  body('image').custom(validateFile)
+  
     
 ];
 

@@ -13,7 +13,7 @@ const router = express.Router();
 router.get('/getallproducts', verifyToken, getAllProducts);
 router.get('/getproduct/:id', getProductById);
 router.post('/createproduct', verifyToken,upload.single('image'), validateCreateProduct, createProduct);
-router.put('/updateproduct/:id', verifyToken, validateUpdateProduct, updateProduct);
+router.put('/updateproduct/:id', verifyToken, upload.single('image'), validateUpdateProduct, updateProduct);
 router.delete('/deleteproduct/:id', verifyToken, deleteProduct);
 
 
